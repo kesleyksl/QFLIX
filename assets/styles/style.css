@@ -5,6 +5,14 @@ body {
     background-color: black;
 }
 
+#header-pag2{
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#header-pag2 img{
+    max-width: 100%;
+}
 #section-pag2 {
     text-align: center;
     display: flex;
@@ -13,14 +21,12 @@ body {
     flex-wrap: wrap;
 }
 
-#header-pag2 {
-    margin: 3vh auto;
-}
-
 #content-pag2 {
     color: white;
     font-size: 40px;
     margin: 2vh 5vw;
+    display: flex;
+    justify-content: center;
 }
 
 #content-pag2 p {
@@ -51,3 +57,4 @@ body {
     font-weight: bold;
     cursor: pointer;
 }
+
