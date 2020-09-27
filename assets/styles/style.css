@@ -5,16 +5,14 @@ body {
     background-color: black;
 }
 
+
+
 #section-pag2 {
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     flex-wrap: wrap;
-}
-
-#header-pag2 {
-    margin: 3vh auto;
 }
 
 #content-pag2 {
@@ -51,3 +49,4 @@ body {
     font-weight: bold;
     cursor: pointer;
 }
+
