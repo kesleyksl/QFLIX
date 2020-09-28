@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <link rel="stylesheet" href="./assets/styles/style-roleta.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <title>QFLIX</title>
+</head>
+<body>
+  <section class="d-flex justify-content-center align-items-center vh-100 vw-100">
+    <a href="index.html" class="closed"> 
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-bar-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"/>
+      </svg>
+      <span>Voltar</span>
+    </a>
+    <div class="center">
+      <div class="main">
+        <form class="d-flex flex-column align-items-center justify-content-center">
+          <div class="form-group">
+            <label for="type-choose">Tipo<span>*</span></label>
+            <select class="form-control" id="type-choose">
+              <option selected disabled>Selecione</option>
+                <option>Filme</option>
+                <option>Série</option>
+              </select>
+          </div>
+          <div class="form-group">
+            <label for="genre-choose">Gênero<span>*</span></label>
+            <select multiple class="form-control" id="genre-choose">
+              <option selected disabled>Selecione</option>
+              <option value="romance">Romance</option>
+              <option value="comedia">Comédia</option>
+              <option value="terror">Terror</option>
+              <option value="aventura">Aventura</option>
+              <option value="desenho">Desenho</option>
+              <option value="suspense">Suspense</option>
+              <option value="drama">Drama</option>
+            </select>
+          </div>
+            <div class="form-group d-sm-flex ">
+              <label for="rating-choose">Nota IMDB
+              <input type="text" class="form-control" id="rating-choose"
+              placeholder=""/></label>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="button" class="btn btn-outline-primary btn-purple">
+                Escolha por mim
+              </button>
+            </div>
+        </form>
+      </div>
+      <div class="ring"></div>
+    </div>
+  </section>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>
