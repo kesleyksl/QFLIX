@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url('../img/back.jpg');
+  background-repeat: no-repeat;
+  object-fit: cover;
+  background-size: 100% 100%;
+  color: #fff !important;
+  display: flex;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  width: 100%;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.ring {
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  box-shadow: 5px 4px 0 purple;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 0;
+  animation: animate 1s linear infinite;
+}
+.main {
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  font-size: 16px;
+  background: transparent;
+  box-shadow: 1px 2px 5px rgba(181, 4, 251, 0.2);
+  z-index: 10;
+}
+
+.closed {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  box-shadow: 1px 2px 2px rgba(181, 4, 251, 0.2);
+  width: auto;
+  padding: 15px;
+  font-weight: 700;
+  transition: background-color 1s ease;
+  cursor: pointer;
+  border-radius: 10px;
+  color: #fff;
+  text-decoration: none !important;
+}
+
+.closed:visited,
+.closed:active {
+  color: #fff;
+  text-decoration: none;
+}
+
+.closed:hover {
+  background-color: purple;
+}
+
+form input {
+  /*input nota imdb*/
+  width: 80px !important;
+  text-align: center;
+}
+
+@keyframes animate {
+  /*rotacao*/
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-purple {
+  border: 1px solid #fff !important;
+  color: #fff !important;
+  -moz-transition: background-color 0.7s ease-in-out, color 0.2s ease;
+  transition: background-color 0.7s ease-in-out, color 0.2s ease;
+}
+
+.btn-purple:hover {
+  color: #fff !important;
+  background-color: purple !important;
+}
+
+@media (max-width: 425px) {
+  body {
+    display: flex;
+    max-width: 100%;
+  }
+  .ring {
+    width: 305px;
+    height: 305px;
+  }
+  .main {
+    width: 305px;
+    height: 305px;
+  }
+  .btn-purple {
+    background-color: purple !important;
+  }
+}
