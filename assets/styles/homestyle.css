@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #141d22;
+    width: 100%;
+}
+
+
+.init-texto{
+    color: #ede2fa;
+    width: 100%;
+    margin-top: 15px;
+    font-size: 40px;
+}
+
+#frase1 {
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+.init-forms ul {
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0; 
+}
+
+.init-forms ul li{
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.buttons input {
+    width: 115px;
+    height: 35px;
+    padding: auto;
+    margin: auto;
+    outline-style: none;
+    background-color: rgba(131, 12, 160, 0.8);
+    border-color: #830CA0;
+    color: white;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    text-align: center;
+    opacity: 0.6;
+    transition-duration: 0.4s;
+}
+
+
+.buttons form {
+    margin: auto;
+    padding: auto;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-top: 7px;
+    padding-bottom: 10px;
+}
+
+.buttons li {
+    display: inline-block;
+}
+
+.buttons input:hover {
+    cursor: pointer;
+    opacity: 1;
+    width: 140px;
+    height: 50px;
+    font-size: 19px;
+}
+

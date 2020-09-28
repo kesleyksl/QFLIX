@@ -1,0 +1,56 @@
+.card {
+
+   width: 207px;
+   min-width: 207px;
+   margin-right: 20px;
+   height: 297px;
+   transition: all .8s;
+   cursor: pointer;
+   margin-bottom: 20px;
+   background-repeat: no-repeat;
+   background-size: cover;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-end;
+}
+.card div{
+
+   background-color: rgba(255, 255, 255, .8);
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-end;
+   padding: 10px;
+}
+.card:hover{
+   width: 250px;
+   max-width: 317px ;
+   margin-right: 20px;
+   height: 350px;
+}
+.main-content{
+   overflow: hidden;
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: row;
+   justify-content: center;
+   padding: 30px;
+   padding-bottom: 100px;
+
+}
+.filtros{
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+   padding: 0 20px 20px 20px;
+   display: flex;
+   justify-content: space-between;  
+   text-align: center;
+}
+.filtros a{
+   width: 100px;
+   height: 80px;
+   border-radius: 50%;
+   background-color:rgba(255, 255, 255, .8);
+   padding-top: 30px;
+   text-decoration: none;
+}
