@@ -39,3 +39,28 @@ body {
 
 }
 
+/* .form-search {
+    width: 70vw;
+}
+
+.form-search input {
+    width: 100%;
+} */
+
+
+.input-search{
+    width: 70%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.input{
+    margin-right: 10px;
+    width: 80%;
+}
+
+@media (max-width: 479px) {
+    .input-search {
+        width: 100%;
+    }
+}
