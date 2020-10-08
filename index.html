@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,">
+    <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/styles/homestyle.css">
@@ -24,14 +24,12 @@
 
     <div class='seach-group d-flex flex-wrap justify-content-center col-12'>
         <div class="dropdown my-2 mr-2">
-            <button class="btn dropdown-toggle btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+            <button class="btn dropdown-toggle btn-secondary" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Botão dropdown
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Alguma ação</a>
-                <a class="dropdown-item" href="#">Outra ação</a>
-                <a class="dropdown-item" href="#">Alguma coisa aqui</a>
+                <ul id="genre-list"></ul>
             </div>
         </div>
 
@@ -42,6 +40,13 @@
         </div>
     </div>
 
+    <div class="ring"></div>
+    <!-- Modal -->
+    <button id="modal-button" type="button" class="btn btn-outline-primary" data-toggle="modal"
+        data-target="#ExemploModalCentralizado">
+        ROLETA
+    </button>
+    <div id="modal-div"></div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -52,6 +57,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+    <script src="./js/modal.js"></script>
+    <script src="./js/button.js"></script>
 
 </body>
 
