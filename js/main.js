@@ -20,17 +20,20 @@ function createCards(nowPlaying) {
 
     nowPlaying.forEach((movie) => {
         console.log(newCard(movie.title, movie.realease_date, movie.poster_path))
-        main.insertAdjacentHTML("beforeend", newCard(movie.title, movie.release_date, movie.poster_path))
+        main.insertAdjacentHTML("beforeend", newCard(movie.title, movie.release_date, movie.poster_path, movie.overview))
     })
 
 }
 
-function newCard(title, releaseDate, imagePath) {
+function newCard(title, releaseDate, imagePath, overview) {
     let date = new Date(releaseDate).toLocaleDateString();
     return `<div class="card"  style="background-image: url('${baseImages}${imagePath}');">
-                <div >
+                <div class="details">
                     <h5 class="card-title">${title}</h5>
                     <p class="card-text">Lançamento${date}</p>
+                    <div class="description">
+                        ${overview}
+                    </div>
                 </div>
             </div>`
 }

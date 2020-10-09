@@ -52,3 +52,13 @@
    padding-top: 30px;
    text-decoration: none;
 }
+
+.description{
+   display: none !important;
+   height: 200px;
+   overflow-y: scroll;
+   overflow-x: hidden;
+}
+.card:hover .details .description{
+   display: block !important;
+}
