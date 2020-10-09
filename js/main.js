@@ -2,7 +2,7 @@ const genresList = document.querySelector('[data-genre-list]');
 const main = document.querySelector('[data-main]');
 const searchButton = document.querySelector('[data-search-button]');
 const inputSearch = document.querySelector('[data-input-search]');
-var movies=[];
+var movies = [];
 
 window.addEventListener('load', async () => {
     const genres = await getCategories();
@@ -32,7 +32,7 @@ function createCards(nowPlaying) {
 function newCard(title, releaseDate, imagePath, overview) {
     let date = new Date(releaseDate).toLocaleDateString();
 
-    let image = imagePath == null?'https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg':`${baseImages}${imagePath}`
+    let image = imagePath == null ? 'https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg' : `${baseImages}${imagePath}`
     console.log(image)
     return `<div class="card"  style="background-image: url('${image}');">
                 <div class="details">
@@ -45,29 +45,43 @@ function newCard(title, releaseDate, imagePath, overview) {
             </div>`
 }
 
-async function filter(genreId, movieName){
+async function filter(genreId, movieName) {
     let filtered = []
-    if(genreId !== "" && genreId>0){
+    if (genreId !== "" && genreId > 0) {
         filtered = filtered.concat(await getByGenreId(genreId))
     }
 
-    if(movieName !==""){
+    if (movieName.trim() !== "") {
         filtered = filtered.concat(await getByName(movieName))
     }
 
-    if((genreId === "" || genreId<0) && movieName ===""){
+    if ((genreId === "" || genreId < 0) && movieName.trim() === "") {
         filtered = filtered.concat(await getNowPlaying())
     }
     return filtered;
 }
 
-searchButton.addEventListener('click',async (e)=>{
+searchButton.addEventListener('click', async (e) => {
     e.preventDefault();
-    main.innerHTML  = '';
+    main.innerHTML = '';
     this.movies = [];
     let category = genresList.value;
     let name = inputSearch.value;
     let movies = await filter(category, name);
 
     this.createCards(movies)
+})
+
+inputSearch.addEventListener('keyup', async (e) => {
+
+    if (e.keyCode === 13 && inputSearch.value !== "") {
+        e.preventDefault();
+        main.innerHTML = '';
+        this.movies = [];
+        let category = genresList.value;
+        let name = inputSearch.value;
+        let movies = await filter(category, name);
+
+        this.createCards(movies)
+    }
 })
