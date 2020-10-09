@@ -51,11 +51,11 @@ async function filter(genreId, movieName) {
         filtered = filtered.concat(await getByGenreId(genreId))
     }
 
-    if (movieName !== "") {
+    if (movieName.trim() !== "") {
         filtered = filtered.concat(await getByName(movieName))
     }
 
-    if ((genreId === "" || genreId < 0) && movieName === "") {
+    if ((genreId === "" || genreId < 0) && movieName.trim() === "") {
         filtered = filtered.concat(await getNowPlaying())
     }
     return filtered;
