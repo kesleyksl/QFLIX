@@ -28,7 +28,7 @@ body {
   border-radius: 50%;
   box-shadow: 5px 4px 0 purple;
   background: rgba(0, 0, 0, 0.7);
-  z-index: 0;
+  z-index: 2;
   animation: animate 1s linear infinite;
 }
 .main {
