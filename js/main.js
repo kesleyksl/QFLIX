@@ -37,7 +37,7 @@ function newCard(title, releaseDate, imagePath, overview) {
     return `<div class="card"  style="background-image: url('${image}');">
                 <div class="details">
                     <h5 class="card-title">${title}</h5>
-                    <p class="card-text">Lançamento${date}</p>
+                    <p class="card-text">Lançamento: ${date}</p>
                     <div class="description">
                         ${overview}
                     </div>
@@ -71,3 +71,80 @@ searchButton.addEventListener('click',async (e)=>{
 
     this.createCards(movies)
 })
+
+
+// Modal //
+
+const modalHTML = `
+    <div class="modal fade" id="modal-roleta" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="ring2"></div>
+            <div class="modal-content">
+                <div id="modal-header-m1" class="modal-header">
+                    <h5 class="modal-title" id="TituloModalCentralizado">Roleta de sugestões</h5>
+                    <button id="button-close" type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modal-body-m1" class="modal-body">
+                    <span class="items-body-modal">Escolha suas preferências (opcional)</span>
+                    <input id="input-nota" class="form-control items-body-modal" input" type="search" data-input-search placeholder="Nota média mínima (7.5)" aria-label="Nota média mínima (7.5)">
+                    <input id="input-ano" class="form-control items-body-modal" input" type="search" data-input-search placeholder="Ano de lançamento mín. (2014)" aria-label="Ano de lançamento mínimo (2014)">
+                </div>
+                <div id="modal-footer-m1" class="modal-footer">
+                    <button type="button" class="btn btn-secondary button-close" data-dismiss="modal">Cancelar</button>
+                    <button id="card-button" type="button" class="btn btn-purple" data-dismiss="modal" data-toggle="modal" data-target="#modal-card">Rodar Roleta</button>
+                </div>
+            </div>
+        </div>
+    </div>`
+
+const modalCard = `
+    <div class="modal fade" id="modal-card" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="ring2"></div>
+            <div class="modal-content">
+                <div id="modal-header-m2" class="modal-header">
+                    <h5 class="modal-title" id="TituloModalCentralizado">Bora assistir esse?</h5>
+                    <button id="button-close" type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modal-body-m2" class="modal-body">
+                </div>
+                <div id="modal-footer-m2" class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="modal" data-target="#modal-roleta">Quero outro</button>
+                    <button id="card-button" type="button" class="btn btn-purple button-close" data-dismiss="modal">Gostei!</button>
+                </div>
+            </div>
+        </div>
+    </div>`
+
+
+
+const modalButton = document.getElementById('modal-button');
+
+modalButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    const modalDiv = document.getElementById('modal-div');
+    modalDiv.innerHTML = modalHTML;
+    const cardDiv = document.getElementById('card-div');
+    cardDiv.innerHTML = modalCard;
+
+    const inputNota = document.getElementById('input-nota');
+    const inputAno = document.getElementById('input-ano');
+    const cardButton = document.getElementById('card-button');
+
+    cardButton.addEventListener('click', async (e) => {
+        e.preventDefault();
+        var movie = [];
+        const inputreleaseDate = inputAno.value;
+        const inputvoteAverage = inputNota.value;
+        movie = await getDiscoverRoleta(inputreleaseDate, inputvoteAverage);
+        const indexRoleta = Math.floor(Math.random() * movie.length - 1);
+        var resultadoRoleta = movie[indexRoleta];
+
+        const modalBodyCard = document.getElementById('modal-body-m2');
+        modalBodyCard.innerHTML = newCard(resultadoRoleta.title, resultadoRoleta.release_date, resultadoRoleta.poster_path, resultadoRoleta.overview);
+    })
+});

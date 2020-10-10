@@ -34,3 +34,10 @@ async function getByGenreId(genreId){
     const data = await response.json();
     return data.results
 }
+
+async function getDiscoverRoleta(inputreleaseDate, inputvoteAverage) {
+    const url = baseUrl + `discover/movie?api_key=af19825a1a0be0a03403c1e309e9e297&language=pt-br&include_adult=false&include_video=false&page=1&release_date.gte=${inputreleaseDate}&vote_average.gte=${inputvoteAverage}`
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.results
+}
