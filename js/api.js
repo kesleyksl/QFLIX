@@ -34,3 +34,10 @@ async function getByGenreId(genreId){
     const data = await response.json();
     return data.results
 }
+
+async function getMovieDetails(movieId){
+    const url = baseUrl + `movie/${movieId}?api_key=${key}&language=pt-br`
+    const response = await fetch(url);
+    const details = await response.json();
+    return details;
+}
