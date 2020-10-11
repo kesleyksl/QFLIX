@@ -29,14 +29,7 @@ async function getByName(name){
 
 
 async function getByGenreId(genreId){
-    const url = baseUrl + `discover/movie?api_key=${key}&language=pt-br&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreId}`
-    const response = await fetch(url);
-    const data = await response.json();
-    return data.results
-}
-
-async function getDiscoverRoleta(inputreleaseDate, inputvoteAverage) {
-    const url = baseUrl + `discover/movie?api_key=${key}&language=pt-br&include_adult=false&include_video=false&page=1&release_date.gte=${inputreleaseDate}&vote_average.gte=${inputvoteAverage}`
+    const url = baseUrl + `discover/movie?api_key=af19825a1a0be0a03403c1e309e9e297&language=pt-br&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreId}`
     const response = await fetch(url);
     const data = await response.json();
     return data.results
@@ -47,4 +40,11 @@ async function getMovieDetails(movieId){
     const response = await fetch(url);
     const details = await response.json();
     return details;
+}
+
+async function getDiscoverRoleta(inputreleaseDate, inputvoteAverage) {
+    const url = baseUrl + `discover/movie?api_key=af19825a1a0be0a03403c1e309e9e297&language=pt-br&include_adult=false&include_video=false&release_date.gte=${inputreleaseDate}&vote_average.gte=${inputvoteAverage}`
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.results
 }

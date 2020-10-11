@@ -33,12 +33,7 @@ function newCard(title, id, releaseDate, imagePath) {
     return `<div class="card" data-js="${id}"  style="background-image: url('${image}');">
                 <div class="details" data-js="${id}">
                     <h5 class="card-title">${title}</h5>
-                    <p class="card-text">Lançamento: ${date}</p>
-                    <div class="description">
-                        ${overview}
-                    </div>
                     <p class="card-text">Lançamento - ${date}</p>
-
                 </div>
             </div>`
 }
@@ -108,9 +103,8 @@ searchButton.addEventListener('click', async (e) => {
     this.createCards(movies)
 })
 
-
 inputSearch.addEventListener('keyup', async (e) => {
-    
+
     if (e.keyCode === 13 && inputSearch.value !== "") {
         e.preventDefault();
         main.innerHTML = '';
@@ -134,7 +128,7 @@ main.addEventListener('click', async (e) => {
 
 });
 
-// Modal //
+//Modal
 
 const modalHTML = `
     <div class="modal fade" id="modal-roleta" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
@@ -149,8 +143,10 @@ const modalHTML = `
                 </div>
                 <div id="modal-body-m1" class="modal-body">
                     <span class="items-body-modal">Escolha suas preferências (opcional)</span>
-                    <input id="input-nota" class="form-control items-body-modal" input" type="search" data-input-search placeholder="Nota média mínima (7.5)" aria-label="Nota média mínima (7.5)">
-                    <input id="input-ano" class="form-control items-body-modal" input" type="search" data-input-search placeholder="Ano de lançamento mín. (2014)" aria-label="Ano de lançamento mínimo (2014)">
+                    <span class="items-body-modal title-input">Nota média mínima (0 a 10)</span>
+                    <input id="input-nota" class="form-control items-body-modal" input" type="search" data-input-search placeholder="Exemplo (7.5)" aria-label="Exemplo (7.5)">
+                    <span class="items-body-modal title-input">Ano de lançamento mínimo</span>
+                    <input id="input-ano" class="form-control items-body-modal" input" type="search" data-input-search placeholder="Exemplo (2014)" aria-label="Exemplo (2014)">
                 </div>
                 <div id="modal-footer-m1" class="modal-footer">
                     <button type="button" class="btn btn-secondary button-close" data-dismiss="modal">Cancelar</button>
@@ -206,6 +202,6 @@ modalButton.addEventListener('click', (e) => {
         var resultadoRoleta = movie[indexRoleta];
 
         const modalBodyCard = document.getElementById('modal-body-m2');
-        modalBodyCard.innerHTML = newCard(resultadoRoleta.title, resultadoRoleta.release_date, resultadoRoleta.poster_path, resultadoRoleta.overview);
+        modalBodyCard.innerHTML = newCard(resultadoRoleta.title, resultadoRoleta.id, resultadoRoleta.release_date, resultadoRoleta.poster_path, resultadoRoleta.overview);
     })
 });
