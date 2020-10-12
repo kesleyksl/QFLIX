@@ -172,7 +172,8 @@ body {
 
 #modal-body-m2 {
 display: flex;
-justify-content: space-between;
+justify-content: center;
+align-content: center;
 flex-direction: column;
 text-align: center;
 border: none;

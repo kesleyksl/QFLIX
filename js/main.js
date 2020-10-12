@@ -6,9 +6,10 @@ const cardDiv = document.querySelector('.card');
 var movies = [];
 
 window.addEventListener('load', async () => {
+    loading(main)
     const genres = await getCategories();
     movies = await getNowPlaying();
-
+    main.innerHTML = '';
     createList(genres);
     createCards(movies);
 
@@ -38,12 +39,12 @@ function newCard(title, id, releaseDate, imagePath) {
             </div>`
 }
 
-async function cardDetails(movieId){
+async function cardDetails(movieId) {
     const details = await getMovieDetails(movieId);
     return details;
 }
 
-function renderDetails(details){
+function renderDetails(details) {
     let div = document.createElement('div');
     div.setAttribute('class', 'cardDetails');
     let date = new Date(details.release_date).toLocaleDateString('en-GB');
@@ -54,7 +55,7 @@ function renderDetails(details){
         `   
         <div class="container-details">
                 <h1 class="cardDetails_title txt-purple"><center>${details.title}<center></h1>
-                <p><span>Gênero:</span> ${details.genres.map( genre => genre.name )}</p>
+                <p><span>Gênero:</span> ${details.genres.map(genre => genre.name)}</p>
                 <p><span>Overview:</span> ${details.overview}</p>
                 <p><span>Lançamento:</span> ${date}</p>
                 <p><span>Duração:</span> ${details.runtime} minutos</p>
@@ -70,8 +71,8 @@ function renderDetails(details){
 
 }
 
-function hideDetails(){
-    if (main.lastElementChild.classList.contains('cardDetails')){
+function hideDetails() {
+    if (main.lastElementChild.classList.contains('cardDetails')) {
         main.removeChild(main.lastElementChild);
     }
 }
@@ -94,34 +95,41 @@ async function filter(genreId, movieName) {
 
 searchButton.addEventListener('click', async (e) => {
     e.preventDefault();
-    main.innerHTML = '';
+    loading(main)
+
     this.movies = [];
     let category = genresList.value;
     let name = inputSearch.value;
     let movies = await filter(category, name);
+    main.innerHTML = '';
+
 
     this.createCards(movies)
+    if (isNotFound(movies, main))
+        return;
 })
 
 inputSearch.addEventListener('keyup', async (e) => {
 
-    if (e.keyCode === 13 && inputSearch.value !== "") {
+    if (e.keyCode === 13) {
         e.preventDefault();
-        main.innerHTML = '';
+        loading(main)
+
         this.movies = [];
         let category = genresList.value;
         let name = inputSearch.value;
         let movies = await filter(category, name);
 
         this.createCards(movies)
+        if (isNotFound(movies, main))
+            return;
     }
 })
 
 main.addEventListener('click', async (e) => {
     e.preventDefault();
     hideDetails();
-    if (e.target.classList.contains('card') || e.target.classList.contains('details')){
-        console.log(e.target.dataset.js);
+    if (e.target.classList.contains('card') || e.target.classList.contains('details')) {
         let details = await getMovieDetails(e.target.dataset.js);
         renderDetails(details);
     }
@@ -144,9 +152,9 @@ const modalHTML = `
                 <div id="modal-body-m1" class="modal-body">
                     <span class="items-body-modal">Escolha suas preferências (opcional)</span>
                     <span class="items-body-modal title-input">Nota média mínima (0 a 10)</span>
-                    <input id="input-nota" class="form-control items-body-modal" input" type="search" data-input-search placeholder="Exemplo (7.5)" aria-label="Exemplo (7.5)">
+                    <input id="input-nota" class="form-control items-body-modal" input" type="number" data-input-search placeholder="Exemplo (7.5)" aria-label="Exemplo (7.5)">
                     <span class="items-body-modal title-input">Ano de lançamento</span>
-                    <input id="input-ano" class="form-control items-body-modal" input" type="search" data-input-search placeholder="Exemplo (2014)" aria-label="Exemplo (2014)">
+                    <input id="input-ano" class="form-control items-body-modal" input" type="number" data-input-search placeholder="Exemplo (2014)" aria-label="Exemplo (2014)">
                 </div>
                 <div id="modal-footer-m1" class="modal-footer">
                     <button type="button" class="btn btn-secondary button-close" data-dismiss="modal">Cancelar</button>
@@ -194,22 +202,54 @@ modalButton.addEventListener('click', (e) => {
 
     cardButton.addEventListener('click', async (e) => {
         e.preventDefault();
-        
+        const modalBodyCard = document.getElementById('modal-body-m2');
+        loading(modalBodyCard)
+
+
         const inputreleaseDate = inputAno.value;
         const inputvoteAverage = inputNota.value;
         var movie = [];
 
-        for (var i = 1; i < 20; i++) {
+        for (var i = 1; i < 10; i++) {
             var pageResult = i;
             var moviePage = [];
-            moviePage = await getDiscoverRoleta(pageResult ,inputreleaseDate, inputvoteAverage);
-            movie.push(...moviePage);
+            moviePage = await getDiscoverRoleta(pageResult, inputreleaseDate, inputvoteAverage);
+
+            if (moviePage.total_pages == 0)
+                i = 99999;
+            movie.push(...moviePage.results);
         }
-        
+        main.innerHTML = '';
+
         const indexRoleta = Math.floor(Math.random() * movie.length - 1);
         var resultadoRoleta = movie[indexRoleta];
 
-        const modalBodyCard = document.getElementById('modal-body-m2');
+        if (isNotFound(movie, modalBodyCard))
+            return;
         modalBodyCard.innerHTML = newCard(resultadoRoleta.title, resultadoRoleta.id, resultadoRoleta.release_date, resultadoRoleta.poster_path, resultadoRoleta.overview);
+
     })
 });
+
+
+function hasResult(movies) {
+    return movies.length > 0;
+}
+
+function renderNotFound(reference) {
+    reference.innerHTML = `<h1 style="color:white;">Resultado não encontrado</h1>`
+}
+
+function isNotFound(movies, element) {
+    if (!hasResult(movies)) {
+        renderNotFound(element);
+        return true;
+    }
+    return false;
+}
+
+function loading(element) {
+    element.innerHTML = `<div class="spinner-border text-light" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>`
+}
