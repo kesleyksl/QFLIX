@@ -145,7 +145,7 @@ const modalHTML = `
                     <span class="items-body-modal">Escolha suas preferências (opcional)</span>
                     <span class="items-body-modal title-input">Nota média mínima (0 a 10)</span>
                     <input id="input-nota" class="form-control items-body-modal" input" type="search" data-input-search placeholder="Exemplo (7.5)" aria-label="Exemplo (7.5)">
-                    <span class="items-body-modal title-input">Ano de lançamento mínimo</span>
+                    <span class="items-body-modal title-input">Ano de lançamento</span>
                     <input id="input-ano" class="form-control items-body-modal" input" type="search" data-input-search placeholder="Exemplo (2014)" aria-label="Exemplo (2014)">
                 </div>
                 <div id="modal-footer-m1" class="modal-footer">
@@ -194,10 +194,18 @@ modalButton.addEventListener('click', (e) => {
 
     cardButton.addEventListener('click', async (e) => {
         e.preventDefault();
-        var movie = [];
+        
         const inputreleaseDate = inputAno.value;
         const inputvoteAverage = inputNota.value;
-        movie = await getDiscoverRoleta(inputreleaseDate, inputvoteAverage);
+        var movie = [];
+
+        for (var i = 1; i < 20; i++) {
+            var pageResult = i;
+            var moviePage = [];
+            moviePage = await getDiscoverRoleta(pageResult ,inputreleaseDate, inputvoteAverage);
+            movie.push(...moviePage);
+        }
+        
         const indexRoleta = Math.floor(Math.random() * movie.length - 1);
         var resultadoRoleta = movie[indexRoleta];
 
