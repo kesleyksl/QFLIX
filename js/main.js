@@ -29,12 +29,14 @@ function createCards(nowPlaying) {
 }
 
 function newCard(title, id, releaseDate, imagePath) {
-    let date = new Date(releaseDate).toLocaleDateString('en-GB');
+    let date = releaseDate != '' 
+               ? new Date(releaseDate).toLocaleDateString('en-GB')
+               : '';
     let image = imagePath == null ? 'https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg' : `${baseImages}${imagePath}`
     return `<div class="card" data-js="${id}"  style="background-image: url('${image}');">
                 <div class="details" data-js="${id}">
                     <h5 class="card-title">${title}</h5>
-                    <p class="card-text">Lançamento - ${date}</p>
+                    <p class="card-text">Lançamento - ${date == '' ? "Indisponível" : date}</p>
                 </div>
             </div>`
 }
@@ -47,7 +49,9 @@ async function cardDetails(movieId) {
 function renderDetails(details) {
     let div = document.createElement('div');
     div.setAttribute('class', 'cardDetails');
-    let date = new Date(details.release_date).toLocaleDateString('en-GB');
+    let date = details.release_date != '' 
+               ? new Date(details.release_date).toLocaleDateString('en-GB')
+               : '';
 
     main.appendChild(div);
     div.insertAdjacentHTML(
@@ -55,11 +59,23 @@ function renderDetails(details) {
         `   
         <div class="container-details">
                 <h1 class="cardDetails_title txt-purple"><center>${details.title}<center></h1>
-                <p><span>Gênero:</span> ${details.genres.map(genre => genre.name)}</p>
-                <p><span>Overview:</span> ${details.overview}</p>
-                <p><span>Lançamento:</span> ${date}</p>
-                <p><span>Duração:</span> ${details.runtime} minutos</p>
-                <p><span>Nota média:</span> ${details.vote_average}</p>
+                <p><span>Gênero:</span> 
+                    ${details.genres.length == 0
+                        ? "Indisponível"
+                        : (details.genres.map(genre => ' ' + genre.name))}
+                </p>
+                <p><span>Overview:</span> 
+                    ${details.overview == "" ? "Indisponível" : details.overview}
+                </p>
+                <p><span>Lançamento:</span> 
+                    ${date == '' ? "Indisponível" : date}
+                </p>
+                <p><span>Duração:</span> 
+                    ${details.runtime == 0 || details.runtime == null ? "Indisponível" : details.runtime + " minutos"} 
+                </p>
+                <p><span>Nota média:</span> 
+                    ${details.vote_average == 0 ? "Indisponível" : details.vote_average}
+                </p>
             <div class="footer-details">
                 <center>
                     <button type="button" onclick="hideDetails(event)" class="btn bg-purple txt-white" data-dismiss="modal">Fechar</button>
@@ -220,6 +236,7 @@ modalButton.addEventListener('click', (e) => {
             movie.push(...moviePage.results);
         }
         main.innerHTML = '';
+        inputSearch.value = '';
 
         const indexRoleta = Math.floor(Math.random() * movie.length - 1);
         var resultadoRoleta = movie[indexRoleta];
@@ -249,7 +266,10 @@ function isNotFound(movies, element) {
 }
 
 function loading(element) {
-    element.innerHTML = `<div class="spinner-border text-light" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>`
+    element.innerHTML = `
+    <div class="w-100 text-center mb-4">
+        <div class="spinner-grow text-light mx-auto" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div`
 }
