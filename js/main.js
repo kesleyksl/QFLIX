@@ -135,6 +135,7 @@ inputSearch.addEventListener('keyup', async (e) => {
         let category = genresList.value;
         let name = inputSearch.value;
         let movies = await filter(category, name);
+        main.innerHTML = '';
 
         this.createCards(movies)
         if (isNotFound(movies, main))
